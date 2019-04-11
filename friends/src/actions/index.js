@@ -15,3 +15,17 @@ export const login = (creds) => dispatch => {
         })
         .catch(err => console.log(err))
 }
+
+export const FETCH_START = 'FETCH_START';
+export const FETCH_SUCCESS = 'FETCH_SUCCESS';
+export const FETCH_FAILURE = 'FETCH_FAILURE';
+
+export const getData = () => dispatch => {
+    dispatch({ type: FETCH_START })
+    axiosWithAuth()
+        .get('http://localhost:5000/api/friends')
+        .then(res => {
+            dispatch({ FETCH_SUCCESS, payload: res.data.payload })
+        })
+        .catch(err => console.log(err))
+}
